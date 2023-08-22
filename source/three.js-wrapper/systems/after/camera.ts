@@ -9,10 +9,8 @@ export class Camera implements System {
     const width = canvas.clientWidth;
     const height = canvas.clientHeight;
 
-    this.mainCamera = new THREE.PerspectiveCamera(
-      90,
-      width / height
-    );
+    this.mainCamera = new THREE.PerspectiveCamera(90, width / height);
+    this.mainCamera.position.set(0, 0, 100);
   }
 
   public aspect(width: number, height: number): void {

@@ -1,34 +1,50 @@
 import { Component } from "./components/component";
-import { Systems } from "./systems";
+import { ComponentRegistry } from "./componentRegistry";
+import { SystemRegistry } from "./systemRegistry";
 
 export class Entity {
-  private components: Component[];
-  private rootSystems: Systems | null;
+  //private components: ComponentRegistry;
+  private components: ComponentRegistry;
+  private systems: SystemRegistry | null;
 
   constructor() {
-    this.components = [];
-    this.rootSystems = null;
+    this.components = new ComponentRegistry();
+    this.systems = null;
   }
 
-  public setRootSystems(rootSystems: Systems): void {
-    this.rootSystems = rootSystems;
+  public setSystems(systems: SystemRegistry): void {
+    this.systems = systems;
 
-    for (const component of this.components) {
-      component.setRootSystems(this.rootSystems);
-    }
+    this.components.map.forEach((component) => {
+      if (component === null) return;
+      component.setSystems(this.systems!);
+    });
   }
 
   public addComponent(component: Component): void {
-    if (this.rootSystems) {
-      component.setRootSystems(this.rootSystems);
+    component.setComponents(this.components);
+
+    if (this.systems) {
+      component.setSystems(this.systems);
     }
 
-    this.components.push(component);
+    this.components.add(component);
+  }
+
+  public overwriteComponent(component: Component): void {
+    component.setComponents(this.components);
+
+    if (this.systems) {
+      component.setSystems(this.systems);
+    }
+
+    this.components.overwrite(component);
   }
 
   public update(): void {
-    for (const component of this.components) {
+    this.components.map.forEach((component) => {
+      if (component === null) return;
       component.update();
-    }
+    });
   }
 }

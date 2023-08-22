@@ -1,18 +1,27 @@
-import { Systems } from "../systems";
+import { ComponentRegistry } from "../componentRegistry";
+import { SystemRegistry } from "../systemRegistry";
 
 export abstract class Component {
-  protected rootSystems: Systems | null;
+  public readonly registryKey: keyof ComponentRegistry;
+  protected systems: SystemRegistry | null;
+  protected components: ComponentRegistry | null;
 
-  constructor() {
-    this.rootSystems = null;
+  constructor(registryKey: keyof ComponentRegistry) {
+    this.registryKey = registryKey;
+    this.systems = null;
+    this.components = null;
   }
 
-  public setRootSystems(rootSystems: Systems): void {
-    this.rootSystems = rootSystems;
-    this.notifyRootSystems();
+  public setSystems(systems: SystemRegistry): void {
+    this.systems = systems;
+    this.notifySystems();
   }
 
-  protected notifyRootSystems(): void {}
+  protected notifySystems(): void {}
+
+  public setComponents(components: ComponentRegistry): void {
+    this.components = components;
+  }
 
   public update(): void {}
 }

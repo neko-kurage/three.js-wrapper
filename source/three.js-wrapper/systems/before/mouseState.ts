@@ -28,7 +28,7 @@ export class MouseState implements System {
 
   private mouseMove(event: MouseEvent): void {
     // canvas要素上のXY座標
-    const rect = (<Element>event.target).getBoundingClientRect() ;
+    const rect = (<Element>event.target).getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
     // canvas要素の幅・高さ
@@ -39,5 +39,5 @@ export class MouseState implements System {
     this.position.y = -(y / h) * 2 + 1;
   }
 
-  public update():void {}
+  public update(): void {}
 }
