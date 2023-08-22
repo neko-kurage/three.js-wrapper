@@ -1,24 +1,24 @@
 import { EventRegistry } from "./eventRegistry";
 
-export class EventListener {
+export class EventListener<
+  TA = undefined,
+  TB = undefined,
+  TC = undefined,
+  TD = undefined,
+  TE = undefined,
+  TF = undefined,
+> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private callbacks: Map<string, EventRegistry<any, any, any, any, any, any>[]>;
+  private callbacks: Map<string, EventRegistry<TA, TB, TC, TD, TE, TF>[]>;
 
   constructor() {
     this.callbacks = new Map();
   }
 
-  public add<
-    TA = undefined,
-    TB = undefined,
-    TC = undefined,
-    TD = undefined,
-    TE = undefined,
-    TF = undefined,
-  >(
+  public add(
     name: string,
     // eslint-disable-next-line no-unused-vars
-    callback: (argA: TA, argB: TB, argC: TC, argD: TD, argE: TE, argF: TF) => void,
+    callback: (argA?: TA, argB?: TB, argC?: TC, argD?: TD, argE?: TE, argF?: TF) => void,
     scope: object
   ): void {
     if (!this.callbacks.has(name)) {
@@ -39,14 +39,7 @@ export class EventListener {
   }
   */
 
-  dispatch<
-    TA = undefined,
-    TB = undefined,
-    TC = undefined,
-    TD = undefined,
-    TE = undefined,
-    TF = undefined,
-  >(name: string, argA?: TA, argB?: TB, argC?: TC, argD?: TD, argE?: TE, argF?: TF): void {
+  dispatch(name: string, argA?: TA, argB?: TB, argC?: TC, argD?: TD, argE?: TE, argF?: TF): void {
     if (!this.callbacks.has(name)) {
       throw new Error(`'${name}'イベントは登録されていません。`);
     }
