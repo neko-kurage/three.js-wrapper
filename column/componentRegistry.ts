@@ -2,10 +2,10 @@
 Mapで管理するコンポーネントたち。
 */
 
-import { Component } from "../source/components/component";
-import { Collision } from "../source/components/collision";
-import { Mesh } from "../source/components/mesh";
-import { Transform } from "../source/components/transform";
+import { Component } from "../source/three.js-wrapper/components/component";
+import { Collision } from "../source/three.js-wrapper/components/collision";
+import { Mesh } from "../source/three.js-wrapper/components/mesh";
+import { Transform } from "../source/three.js-wrapper/components/transform";
 
 
 export class ComponentRegistry {

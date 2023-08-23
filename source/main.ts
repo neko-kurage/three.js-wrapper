@@ -20,6 +20,7 @@ function setup(): void {
   world.systems.renderer.setAdjustSizeElement(<HTMLElement>document.querySelector("#canvas_size"));
 
   const mesh = new Mesh(new THREE.SphereGeometry(40, 40, 40), new THREE.MeshNormalMaterial());
+  const mesh2 = new Mesh(new THREE.SphereGeometry(60, 40, 40), new THREE.MeshNormalMaterial());
   entity = new Entity();
   entity.addComponent(
     mesh
@@ -31,19 +32,24 @@ function setup(): void {
   
   collision = new Collision(new THREE.SphereGeometry(50, 16, 16), true);
   collision.localPosition = new THREE.Vector3(60, 0, 0);
+  collision.event.add("onMouseOver", () => {
+    //entity.overwriteComponent(mesh2);
+    console.log("hantei");
+  });
+
   entity.addComponent(collision);
 
   world.addEntity(entity);
 
-  const eventListener = new EventListener();
+  const eventListener = new EventListener<string>();
 
   const testFunction = (msg:string): void => {
     console.log(msg);
   };
 
-  eventListener.add<string>("test", testFunction, testFunction);
+  eventListener.add("test", testFunction, testFunction);
 
-  eventListener.dispatch("test", 1);
+  eventListener.dispatch("test", "pika");
 
   renderLoop();
 }
