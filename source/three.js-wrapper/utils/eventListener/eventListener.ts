@@ -18,14 +18,22 @@ export class EventListener<
   public add(
     name: string,
     // eslint-disable-next-line no-unused-vars
-    callback: (argA: TA, argB: TB, argC: TC, argD: TD, argE: TE, argF: TF) => void,
-    scope: object
+    callback?: (argA: TA, argB: TB, argC: TC, argD: TD, argE: TE, argF: TF) => void,
+    scope?: object
   ): void {
     if (!this.callbacks.has(name)) {
       this.callbacks.set(name, []);
     }
 
-    const event = new EventRegistry<TA, TB, TC, TD, TE, TF>(this, name, callback, scope);
+    if (callback === undefined) return;
+
+    let event: EventRegistry<TA, TB, TC, TD, TE, TF>;
+    if (scope === undefined) {
+      event = new EventRegistry<TA, TB, TC, TD, TE, TF>(this, name, callback, callback);
+    } else {
+      event = new EventRegistry<TA, TB, TC, TD, TE, TF>(this, name, callback, scope);
+    }
+
     this.callbacks.get(name)?.push(event);
   }
 
