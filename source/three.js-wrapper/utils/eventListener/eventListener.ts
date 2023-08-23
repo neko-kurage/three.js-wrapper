@@ -18,7 +18,7 @@ export class EventListener<
   public add(
     name: string,
     // eslint-disable-next-line no-unused-vars
-    callback: (argA?: TA, argB?: TB, argC?: TC, argD?: TD, argE?: TE, argF?: TF) => void,
+    callback: (argA: TA, argB: TB, argC: TC, argD: TD, argE: TE, argF: TF) => void,
     scope: object
   ): void {
     if (!this.callbacks.has(name)) {
@@ -45,7 +45,7 @@ export class EventListener<
     }
 
     for (const event of this.callbacks.get(name)!) {
-      event.callback.call(event.scope, argA, argB, argC, argD, argE, argF);
+      event.callback.call(event.scope, <TA>argA, <TB>argB, <TC>argC, <TD>argD, <TE>argE, <TF>argF);
     }
   }
 }
