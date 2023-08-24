@@ -23,6 +23,7 @@ export class ComponentRegistry {
   }
 
   overwrite(component: Component): void {
+    this.map.get(component.registryKey)?.remove();
     Reflect.set(this, component.registryKey, component);
     this.map.set(component.registryKey, <Component>Reflect.get(this, component.registryKey));
   }

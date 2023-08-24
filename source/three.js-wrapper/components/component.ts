@@ -23,5 +23,7 @@ export abstract class Component {
     this.components = components;
   }
 
+  public remove(): void{}
+
   public update(): void {}
 }

@@ -38,7 +38,6 @@ function setup(): void {
   });
   collision.event.add("onMouseExit", () => {
     entity.overwriteComponent(mesh);
-    console.log(entity.components.mesh!.mesh)
     console.log("exit");
   });
 

@@ -47,6 +47,13 @@ export class Mesh extends Component {
     this.mesh.position.set(position.x, position.y, position.z);
   }
 
+  public remove(): void {
+    if (!this.systems) throw new Error("systems is null");
+    this.systems.scene.remove(this.mesh);
+    this.geometry.dispose();
+    this.material.dispose();
+  }
+
   protected override notifySystems(): void {
     if (!this.systems) throw new Error("systems is null");
     this.systems.scene.add(this.mesh);
