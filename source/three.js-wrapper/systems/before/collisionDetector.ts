@@ -34,6 +34,8 @@ export class CollisionDetector implements System {
     this.collisions.forEach((collision) => {
       if (this.raycaster.intersectObject(collision.mesh).length > 0) {
         collision.event.dispatch("onMouseOver");
+      } else {
+        collision.event.dispatch("onMouseOff");
       };
     });
   }

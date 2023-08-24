@@ -10,6 +10,7 @@ export class Collision extends Component {
   public mesh: THREE.Mesh;
   private visibility: boolean;
 
+  private onMouseState: "off" | "over"| "enter" | "exit";
   public event: EventListener;
 
   public globalPosition: THREE.Vector3;
@@ -27,6 +28,7 @@ export class Collision extends Component {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.visibility = visibility;
 
+    this.onMouseState = "off";
     this.event = new EventListener();
     this.initEventListener();
 
@@ -80,6 +82,25 @@ export class Collision extends Component {
   }
 
   private initEventListener(): void {
-    this.event.add("onMouseOver");
+    this.event.add("onMouseOff", (): void => {
+      if (this.onMouseState == "exit") {
+        this.onMouseState = "off";
+      }
+      if (this.onMouseState == "over" || this.onMouseState == "enter") {
+        this.onMouseState = "exit";
+        this.event.dispatch("onMouseExit");
+      }
+    });
+    this.event.add("onMouseOver", (): void => {
+      if (this.onMouseState == "enter") {
+        this.onMouseState = "over";
+      }
+      if (this.onMouseState == "off" || this.onMouseState == "exit") { 
+        this.onMouseState = "enter";
+        this.event.dispatch("onMouseEnter");
+      }
+    });
+    this.event.add("onMouseEnter");
+    this.event.add("onMouseExit");
   }
 }

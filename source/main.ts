@@ -20,7 +20,7 @@ function setup(): void {
   world.systems.renderer.setAdjustSizeElement(<HTMLElement>document.querySelector("#canvas_size"));
 
   const mesh = new Mesh(new THREE.SphereGeometry(40, 40, 40), new THREE.MeshNormalMaterial());
-  const mesh2 = new Mesh(new THREE.SphereGeometry(60, 40, 40), new THREE.MeshNormalMaterial());
+  const mesh2 = new Mesh(new THREE.SphereGeometry(45, 40, 40), new THREE.MeshNormalMaterial());
   entity = new Entity();
   entity.addComponent(
     mesh
@@ -32,12 +32,21 @@ function setup(): void {
   
   collision = new Collision(new THREE.SphereGeometry(50, 16, 16), true);
   collision.localPosition = new THREE.Vector3(60, 0, 0);
-  collision.event.add("onMouseOver", () => {
-    //entity.overwriteComponent(mesh2);
-    console.log("hantei");
+  collision.event.add("onMouseEnter", () => {
+    entity.overwriteComponent(mesh2);
+    console.log("enter");
+  });
+  collision.event.add("onMouseExit", () => {
+    entity.overwriteComponent(mesh);
+    console.log(entity.components.mesh!.mesh)
+    console.log("exit");
   });
 
   entity.addComponent(collision);
+
+  const entity2 = new Entity();
+  entity2.addComponent(new Collision(new THREE.BoxGeometry(150, 10, 10), true));
+  world.addEntity(entity2);
 
   world.addEntity(entity);
 
