@@ -18,11 +18,7 @@ export class Collision extends Component {
 
   constructor(object: Mesh | THREE.BufferGeometry, visibility: boolean = false) {
     super("collision");
-    if (object instanceof Mesh) {
-      this.geometry = object.geometry;
-    } else {
-      this.geometry = object;
-    }
+    this.geometry = object instanceof Mesh ? object.geometry : object;
 
     this.material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
     this.mesh = new THREE.Mesh(this.geometry, this.material);
