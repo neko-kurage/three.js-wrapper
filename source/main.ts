@@ -27,11 +27,11 @@ function setup(): void {
   );
 
   entity.addComponent(
-    new Transform(50, 0, 0)
+    new Transform(0, 0, 0)
   );
   
   collision = new Collision(new THREE.SphereGeometry(50, 16, 16), true);
-  collision.localPosition = new THREE.Vector3(60, 0, 0);
+  collision.localPosition = new THREE.Vector3(50, 0, 0);
   collision.event.add("onMouseEnter", () => {
     entity.overwriteComponent(mesh2);
     console.log("enter");
@@ -39,6 +39,12 @@ function setup(): void {
   collision.event.add("onMouseExit", () => {
     entity.overwriteComponent(mesh);
     console.log("exit");
+  });
+  collision.event.add("onMouseOver", () => {
+    console.log("over");
+  });
+  collision.event.add("onMouseOff", () => {
+    console.log("off");
   });
 
   entity.addComponent(collision);
@@ -62,8 +68,8 @@ function setup(): void {
   renderLoop();
 }
 
-const transformA = new Transform(20, 0, 0);
-const transformB = new Transform(-50, 0, 0);
+const transformA = new Transform(0, 0, 0);
+const transformB = new Transform(0, 0, 0);
 let bool: boolean = false;
 
 function renderLoop(): void {

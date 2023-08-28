@@ -21,7 +21,10 @@ export abstract class Component {
 
   public setComponents(components: ComponentRegistry): void {
     this.components = components;
+    this.notifyComponents();
   }
+
+  protected notifyComponents(): void {}
 
   public remove(): void{}
 
