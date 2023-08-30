@@ -6,12 +6,31 @@ import { Mesh } from "./three.js-wrapper/components/mesh";
 import { Collision } from "./three.js-wrapper/components/collision";
 import { Transform } from "./three.js-wrapper/components/transform";
 import { EventListener } from "./three.js-wrapper/utils/eventListener/eventListener";
+import { Camera } from "./three.js-wrapper/components/camera";
 
 let entity: Entity;
 let world: World;
 let collision: Collision;
+let cameraEntity1: Entity;
+let cameraEntity2: Entity;
+let cameraEntity3: Entity;
+let cameraComponent1 : Camera;
+let cameraComponent2 : Camera;
+let cameraComponent3 : Camera;
 
 window.addEventListener("DOMContentLoaded", setup);
+
+window.addEventListener("keydown", (event) => {
+  if (event.key == "1") {
+    cameraComponent1.activate();
+  }
+  if (event.key == "2") {
+    cameraComponent2.activate();
+  }
+  if (event.key == "3") {
+    cameraComponent3.activate();
+  }
+});
 
 function setup(): void {
   console.log("Hi, this template file is loaded!!");
@@ -60,6 +79,28 @@ function setup(): void {
   const testFunction = (msg:string): void => {
     console.log(msg);
   };
+
+  cameraEntity1 = new Entity();
+  cameraComponent1 = new Camera(new THREE.PerspectiveCamera());
+  cameraComponent1.camera.position.x = 50;
+  cameraComponent1.camera.position.z = 200;
+  cameraEntity1.addComponent(cameraComponent1);
+
+  cameraEntity2 = new Entity();
+  cameraComponent2 = new Camera(new THREE.PerspectiveCamera());
+  cameraComponent2.camera.position.x = -50;
+  cameraComponent2.camera.position.z = 200;
+  cameraEntity2.addComponent(cameraComponent2);
+
+  cameraEntity3 = new Entity();
+  cameraComponent3 = new Camera(new THREE.PerspectiveCamera());
+  cameraComponent3.camera.position.x = -50;
+  cameraComponent3.camera.position.z = 500;
+  cameraEntity3.addComponent(cameraComponent3);
+
+  world.addEntity(cameraEntity1);
+  world.addEntity(cameraEntity2);
+  world.addEntity(cameraEntity3);
 
   eventListener.add("test", testFunction, testFunction);
 
