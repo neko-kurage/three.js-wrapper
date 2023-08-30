@@ -25,13 +25,9 @@ function setup(): void {
   entity.addComponent(
     mesh
   );
-
-  entity.addComponent(
-    new Transform(0, 0, 0)
-  );
   
   collision = new Collision(new THREE.SphereGeometry(50, 16, 16), true);
-  collision.localPosition = new THREE.Vector3(50, 0, 0);
+  collision.localPosition = new THREE.Vector3(0, 0, 0);
   collision.event.add("onMouseEnter", () => {
     entity.overwriteComponent(mesh2);
     console.log("enter");
@@ -48,6 +44,10 @@ function setup(): void {
   });
 
   entity.addComponent(collision);
+
+  entity.addComponent(
+    new Transform(50, 0, 0)
+  );
 
   const entity2 = new Entity();
   entity2.addComponent(new Collision(new THREE.BoxGeometry(150, 10, 10), true));
@@ -76,9 +76,9 @@ function renderLoop(): void {
   world.update();
 
   if (bool) {
-    entity.overwriteComponent(transformA);
+    //entity.overwriteComponent(transformA);
   } else {
-    entity.overwriteComponent(transformB);
+    //entity.overwriteComponent(transformB);
   }
 
   requestAnimationFrame(renderLoop);

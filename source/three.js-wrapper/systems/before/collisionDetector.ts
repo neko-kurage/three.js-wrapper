@@ -36,7 +36,7 @@ export class CollisionDetector implements System {
         collision.event.dispatch("onMouseOver");
       } else {
         collision.event.dispatch("onMouseOff");
-      };
+      }
     });
   }
 }

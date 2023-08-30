@@ -26,7 +26,7 @@ export abstract class Component {
 
   protected notifyComponents(): void {}
 
-  public remove(): void{}
+  public remove(): void {}
 
   public update(): void {}
 }

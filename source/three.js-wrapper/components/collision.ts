@@ -10,7 +10,7 @@ export class Collision extends Component {
   public mesh: THREE.Mesh;
   private visibility: boolean;
 
-  private onMouseState: "off" | "over"| "enter" | "exit";
+  private onMouseState: "off" | "over" | "enter" | "exit";
   public event: EventListener;
 
   public globalPosition: THREE.Vector3;
@@ -91,7 +91,7 @@ export class Collision extends Component {
       if (this.onMouseState == "enter") {
         this.onMouseState = "over";
       }
-      if (this.onMouseState == "off" || this.onMouseState == "exit") { 
+      if (this.onMouseState == "off" || this.onMouseState == "exit") {
         this.onMouseState = "enter";
         this.event.dispatch("onMouseEnter");
       }
