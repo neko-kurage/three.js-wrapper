@@ -48,14 +48,14 @@ export class Mesh extends Component {
   }
 
   public remove(): void {
-    if (!this.systems) throw new Error("systems is null");
+    if (this.systems == null) throw new Error("systems is null");
     this.systems.scene.remove(this.mesh);
     this.geometry.dispose();
     this.material.dispose();
   }
 
   protected override notifySystems(): void {
-    if (!this.systems) throw new Error("systems is null");
+    if (this.systems == null) throw new Error("systems is null");
     this.systems.scene.add(this.mesh);
   }
 }
