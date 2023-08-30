@@ -2,11 +2,13 @@ import { Component } from "./components/component";
 import { Collision } from "./components/collision";
 import { Mesh } from "./components/mesh";
 import { Transform } from "./components/transform";
+import { Camera } from "./components/camera";
 
 export class ComponentRegistry {
   public transform: Transform | null = null;
   public collision: Collision | null = null;
   public mesh: Mesh | null = null;
+  public camera: Camera | null = null;
 
   public map = new Map<keyof ComponentRegistry, Component | null>([
     ["transform", null],

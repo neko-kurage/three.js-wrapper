@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 import { System } from "../system";
-import { Camera } from "./camera";
+import { CameraManager } from "./cameraManager";
 
 export class Renderer implements System {
   public canvas: HTMLElement;
@@ -14,12 +14,12 @@ export class Renderer implements System {
 
   public scene: THREE.Scene;
 
-  public camera: Camera;
+  public camera: CameraManager;
 
   constructor(
     canvas: HTMLElement,
     scene: THREE.Scene,
-    camera: Camera,
+    camera: CameraManager,
     adjustSizeElement: HTMLElement = document.body
   ) {
     this.canvas = canvas;
@@ -40,7 +40,7 @@ export class Renderer implements System {
   }
 
   public update(): void {
-    this.renderer.render(this.scene, this.camera.mainCamera);
+    this.renderer.render(this.scene, this.camera.mainCamera.camera);
   }
 
   public setAdjustSizeElement(adjustSizeElement: HTMLElement): void {

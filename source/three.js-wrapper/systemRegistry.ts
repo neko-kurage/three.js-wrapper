@@ -1,13 +1,13 @@
 import { Scene } from "./systems/before/scene";
 import { MouseState } from "./systems/before/mouseState";
-import { Camera } from "./systems/after/camera";
+import { CameraManager } from "./systems/after/cameraManager";
 import { CollisionDetector } from "./systems/before/collisionDetector";
 import { Renderer } from "./systems/after/renderer";
 
 export class SystemRegistry {
   public scene: Scene;
   public mouseState: MouseState;
-  public camera: Camera;
+  public camera: CameraManager;
   public collisionDetector: CollisionDetector;
   public renderer: Renderer;
 
@@ -17,7 +17,7 @@ export class SystemRegistry {
   };
 
   public afterEntities: {
-    camera: Camera;
+    camera: CameraManager;
     collisionDetector: CollisionDetector;
     renderer: Renderer;
   };
@@ -25,7 +25,7 @@ export class SystemRegistry {
   constructor(canvas: HTMLCanvasElement) {
     this.scene = new Scene();
     this.mouseState = new MouseState(canvas);
-    this.camera = new Camera(canvas);
+    this.camera = new CameraManager(canvas);
     this.collisionDetector = new CollisionDetector(this.mouseState, this.camera);
     this.renderer = new Renderer(canvas, this.scene, this.camera);
 
